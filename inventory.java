@@ -17,12 +17,18 @@ public class inventory{
 	}
 
 
-	Node inventory;
+	Node helmet;
+	Node chestplate;
+	Node gloves;
+	Node boots;
 	String currentItemClass;
 	String[] classArray = new String[]{'helmet', 'chestplate', 'gloves', 'boots'};
 
 	public inventory(){
-		inventory = null;
+		helmet = null;
+		chestplate = null;
+		gloves = null;
+		boots = null;
 		currentItemClass = "";
 	}
 
@@ -30,19 +36,29 @@ public class inventory{
 		String[] arr = classArray;
 		boolean modifier = false;
 		if(itemClass != null && item != null){
-			int i = 0;
-			if(!(arr[i].equals(itemClass))){
-				i++;
-				while(!(arr[i].equals(itemClass))){
-					i++;
-					if(i == 3){
-						modifier = false;
-						break;
-					}
+			if(classChecker(itemClass) != null){
+				
+			}
+			
+		}
+	}
 
+	//classChecker() checks an itemClass to see if it is part 
+	//of the system itemClass ('helmet', 'chestplate', etc...), 
+	//if not then it will return null
+	private static String classChecker(String itemClass){
+		String[] arr = classArray;
+		int i = 0;
+		if(!(arr[i].equals(itemClass))){
+			while(!(arr[i].equals(itemClass))){
+				i++;
+				if(i == 4){
+					return null;
 				}
 			}
 		}
+		return arr[i];
 	}
+
 
 }
