@@ -22,7 +22,7 @@ public class inventory{
 	Node gloves;
 	Node boots;
 	String currentItemClass;
-	String[] classArray = new String[]{'helmet', 'chestplate', 'gloves', 'boots'};
+	String[] classAdd = new String[]{'helmet', 'chestplate', 'gloves', 'boots'};
 
 	public inventory(){
 		helmet = null;
@@ -32,33 +32,41 @@ public class inventory{
 		currentItemClass = "";
 	}
 
+	//add(): adds a piece of armour to the inventory.
+	//checks itemClass to tell what the item is and where to put it.
 	public static void add(String item, String itemClass){
-		String[] arr = classArray;
+		Node inventorySpot; 
+		String[] arr = classAdd;
 		boolean modifier = false;
 		if(itemClass != null && item != null){
-			if(classChecker(itemClass) != null){
-				
+			invenotySpot = classChecker(itemClass);
+			if(itemClass.equals("helmet")){
+				if(inventorySpot == null){
+					inventorySpot.next = new Node(item, itemClass);
+				}
+				else
+					while(H.next != null){
+						H = H.next;
+					}
+					H.next = new Node(item, itemClass);
 			}
-			
 		}
+		else
+				throw new NullPointerException(" Inventory: Add: ERROR: Can't add a null item variable");
 	}
 
-	//classChecker() checks an itemClass to see if it is part 
+	//classChecker() returns the node the itemClass is.
 	//of the system itemClass ('helmet', 'chestplate', etc...), 
-	//if not then it will return null
-	private static String classChecker(String itemClass){
-		String[] arr = classArray;
-		int i = 0;
-		if(!(arr[i].equals(itemClass))){
-			while(!(arr[i].equals(itemClass))){
-				i++;
-				if(i == 4){
-					return null;
-				}
-			}
-		}
-		return arr[i];
+	//if not then it will return null.
+	private static Node classChecker(String itemClass){
+		if(itemClass.equal("helmet")){return helmet };
+		else if(itemClass.equals("chestplate")){return chestplate; }
+		else if(itemClass.equals("gloves")){return gloves; }
+		else if(itemClass.equals("boots")){return boots; }
+		else
+			return null;
 	}
+	
 
 
 }
